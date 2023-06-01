@@ -32,10 +32,12 @@ const Meeting = () => {
 
     // creating 25 video elements
     let videoElements = [];
-    for (let i = 0; i < 24; i++)
+    for (let i = 0; i < 24; i++) {
+      const id = `myVideo${i + 1}`;
       videoElements.push(
-        <VideoComponent id="myVideo1" width="320" height="240"></VideoComponent>
+        <VideoComponent id={id} width="320" height="240"></VideoComponent>
       );
+    }
     setVideoComponents(videoElements);
   }, []);
 
