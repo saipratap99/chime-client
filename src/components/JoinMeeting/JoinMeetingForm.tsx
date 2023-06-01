@@ -195,44 +195,48 @@ function JoinMeetingForm() {
   return (
     <div className="container">
       <div>
-        <div>
-          <h2>Join Meeting</h2>
-          <form onSubmit={submitMeetingForm}>
-            <div className="formElement">
-              <label>
-                Title:
-                <input
-                  type="text"
-                  name="title"
-                  value={meetingForm.title}
-                  onChange={onChangeMeetingFormHandler}
-                />
-              </label>
+        <div className="">
+          <h2 className="text-primary text-center">Join Meeting</h2>
+          <form
+            onSubmit={submitMeetingForm}
+            className="w-50 w-lg-25 w-xl-25 border p-3 mx-auto"
+          >
+            <div className="mb-3">
+              <label className="form-label">Title</label>
+              <input
+                type="text"
+                name="title"
+                className="form-control"
+                value={meetingForm.title}
+                onChange={onChangeMeetingFormHandler}
+              />
             </div>
-            <div className="formElement">
-              <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={meetingForm.name}
-                  onChange={onChangeMeetingFormHandler}
-                />
-              </label>
+            <div className="mb-3">
+              <label className="form-label">Name</label>
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                value={meetingForm.name}
+                onChange={onChangeMeetingFormHandler}
+              />
             </div>
 
-            <div className="formElement">
-              <label>
-                Region:
-                <input
-                  type="text"
-                  name="region"
-                  value={meetingForm.region}
-                  onChange={onChangeMeetingFormHandler}
-                />
-              </label>
+            <div className="mb-3">
+              <label className="form-label">Region</label>
+              <input
+                type="text"
+                name="region"
+                className="form-control"
+                value={meetingForm.region}
+                onChange={onChangeMeetingFormHandler}
+              />
             </div>
-            <input type="submit" value="Submit" />
+            <input
+              type="submit"
+              value="Submit"
+              className="btn btn-primary text-center w-100"
+            />
           </form>
         </div>
       </div>
