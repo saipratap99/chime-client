@@ -10,11 +10,15 @@ import {
 } from "amazon-chime-sdk-js";
 import { useLocation } from "react-router-dom";
 import ChimeService from "../../services/chimeService";
+import AttendeeService from "../../services/attendeeService";
+import { JSX } from "react/jsx-runtime";
 
 const Meeting = () => {
   const [meetingSession, setMeetingSession] = useState<DefaultMeetingSession>();
   const [meetingInfo, setMeetingInfo] = useState(null);
-  const [chimeService, setChimeService] = useState();
+  const [chimeService, setChimeService] = useState<ChimeService>();
+  const [attendeeService, setAttendeeService] = useState<AttendeeService>();
+  const [videoComponents, setVideoComponents] = useState<JSX.Element[]>([]);
 
   const params = useLocation();
   useEffect(() => {
@@ -25,14 +29,24 @@ const Meeting = () => {
         console.log("Create meeting session success");
       });
     }
+
+    // creating 25 video elements
+    let videoElements = [];
+    for (let i = 0; i < 24; i++)
+      videoElements.push(
+        <VideoComponent id="myVideo1" width="320" height="240"></VideoComponent>
+      );
+    setVideoComponents(videoElements);
   }, []);
 
   useEffect(() => {
     if (meetingSession) {
-      const chimeService = new ChimeService(meetingSession);
-      chimeService
-        .selectAudioVideo()
-        .then((data) => chimeService.bindAudioAndVideo());
+      const chime = new ChimeService(meetingSession);
+
+      chime.selectAudioVideo().then((data) => chime.bindAudioAndVideo());
+      const attendee = new AttendeeService(meetingSession);
+      setAttendeeService(attendee);
+      setChimeService(chime);
     }
   }, [meetingSession]);
 
@@ -54,6 +68,7 @@ const Meeting = () => {
       <h4 className="text-muted">In Meeting </h4>
       <div>
         <VideoComponent id="myVideo" width="320" height="240"></VideoComponent>
+        {videoComponents}
       </div>
       <div>
         <AudioComponent id="myAudio" />

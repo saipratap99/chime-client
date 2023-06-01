@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./JoinMeetingFormStyle.css";
 import { MeetingForm } from "../../models/meetingForm";
-import { joinMeetingService } from "../../services/joinMeetingService";
 
 interface JoinMeetingFormProps {
   submitMeetingForm: any;
